@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المصحف الشامل (Offline)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="app-body">
+    
+    <div id="sidebar-menu" class="sidebar">
+        <div class="sidebar-header">
+            <h3>قائمة التطبيق</h3>
+            <button id="close-sidebar-btn" class="close-btn">×</button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-link main-link active" data-screen="mus-haf">📖 المصحف</a>
+            <a href="#" class="nav-link main-link" data-screen="adhkar">📋 الأذكار</a>
+            <a href="#" class="nav-link main-link" data-screen="tasbeeh">📿 المسبحة</a>
+            <hr>
+            
+            <a href="#" class="nav-link sub-link" data-action="show-sura-list">الفهرس (السور)</a>
+            <a href="#" class="nav-link sub-link" data-action="show-juz-list">الأجزاء (30 جزء)</a>
+            
+            <hr>
+            <a href="#" class="nav-link sub-link" data-action="save-bookmark">حفظ علامة (الصفحة الحالية)</a>
+            <a href="#" class="nav-link sub-link" data-action="go-to-bookmark">الانتقال إلى علامة</a>
+        </nav>
+    </div>
+    
+    <div id="overlay" class="overlay hidden"></div>
+
+    <header class="app-header">
+        <button id="open-sidebar-btn" class="menu-btn">☰</button>
+        <h1>المصحف الشامل</h1>
+        <button id="theme-toggle" class="theme-toggle">☀️</button> 
+    </header>
+
+    <div class="container">
+        
+        <section id="mus-haf-screen" class="app-screen">
+            
+            <section id="navigation-area" class="navigation-area">
+                <h2 id="navigation-title" class="screen-title">الفهرس (السور)</h2>
+                <div id="navigation-content" class="list-content">
+                    <div id="loading-sura-list" class="loading-message">جاري تحميل البيانات المحلية...</div>
+                </div>
+            </section>
+            
+            <section id="quran-view" class="quran-view hidden">
+                
+                <div class="sura-header">
+                    <h2 id="current-sura-title"></h2>
+                    <span id="page-number-display"></span>
+                </div>
+
+                <div id="quran-text-container" class="quran-text-container gold-frame"> 
+                    </div>
+                
+                <div class="page-controls">
+                    <button id="prev-page-btn" class="nav-btn">➡️ الصفحة السابقة</button>
+                    <button id="next-page-btn" class="nav-btn">الصفحة التالية ⬅️</button>
+                </div>
+            </section>
+        </section>
+
+        <section id="adhkar-screen" class="app-screen hidden">
+            <h2 class="screen-title">📋 الأذكار المأثورة</h2>
+            <div id="adhkar-content" class="adhkar-content"></div>
+        </section>
+        
+        <section id="tasbeeh-screen" class="app-screen hidden">
+            <h2 class="screen-title">📿 المسبحة</h2>
+            <div class="tasbeeh-controls">
+                <div id="tasbeeh-display" class="tasbeeh-display">0</div>
+                <button id="tasbeeh-increment" class="tasbeeh-button">سبّح</button>
+                <button id="tasbeeh-reset" class="tasbeeh-reset">تصفير</button>
+            </div>
+            <div class="tasbeeh-options">
+                <h3>ذكر التسبيح الحالي:</h3>
+                <p id="current-dhikr">سبحان الله وبحمده، سبحان الله العظيم</p>
+            </div>
+        </section>
+        
+    </div>
+
+    <footer class="app-signature">
+        الرقيب للصيانه والبرمجـــة 735707210
+    </footer>
+
+    <script src="quran_data.js"></script> 
+    <script src="script.js"></script>
+</body>
+</html>

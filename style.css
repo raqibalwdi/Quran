@@ -1,0 +1,423 @@
+/* ==================================== */
+/* 1. التنسيقات الأساسية والخطوط */
+/* ==================================== */
+
+:root {
+    --primary-color: #4CAF50; /* أخضر */
+    --secondary-color: #2E7D32; /* أخضر داكن */
+    --text-color: #333;
+    --background-color: #f4f4f4;
+    --card-background: #fff;
+    --border-color: #ddd;
+    --gold-color: #D4AF37; /* لون ذهبي للزخرفة */
+}
+
+/* الوضع الليلي */
+.dark-mode {
+    --primary-color: #B29759; /* ذهبي باهت */
+    --secondary-color: #8C753B;
+    --text-color: #E0E0E0;
+    --background-color: #121212;
+    --card-background: #1e1e1e;
+    --border-color: #333;
+    --gold-color: #FFD700;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; 
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    direction: rtl;
+    padding-top: 50px; 
+    padding-bottom: 30px; 
+}
+
+/* ==================================== */
+/* 2. رأس وتذييل التطبيق */
+/* ==================================== */
+
+.app-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.app-header h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.menu-btn, .theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.app-signature {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--secondary-color);
+    color: #fff;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 5px 0;
+    z-index: 1000;
+}
+
+/* ==================================== */
+/* 3. القائمة الجانبية (Sidebar) */
+/* ==================================== */
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 0; 
+    background-color: var(--card-background);
+    overflow-x: hidden;
+    transition: 0.5s;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+}
+
+.sidebar .close-btn {
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    padding: 15px 0;
+}
+
+.sidebar-nav .nav-link {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    display: block;
+    transition: 0.3s;
+    border-right: 5px solid transparent;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: #eee;
+    color: var(--primary-color);
+}
+.dark-mode .sidebar-nav .nav-link:hover {
+    background-color: #222;
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: var(--background-color);
+    border-right: 5px solid var(--primary-color);
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.sidebar-nav hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 10px 15px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    transition: opacity 0.5s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==================================== */
+/* 4. حاوية المحتوى الرئيسي (تعديل الهوامش) */
+/* ==================================== */
+
+.container {
+    padding: 0; /* 🌟 تم إزالة الهامش لملء الشاشة */
+    max-width: 600px; 
+    margin: 0 auto;
+    height: calc(100vh - 80px); /* يملأ الارتفاع المتبقي بعد الهيدر والفوتر */
+    overflow: hidden; 
+}
+
+.app-screen {
+    padding-top: 10px;
+    height: 100%;
+}
+
+.screen-title {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* ==================================== */
+/* 5. شاشة المصحف (ملء الشاشة والسحب) */
+/* ==================================== */
+
+.quran-view {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 100%;
+}
+
+.sura-header {
+    text-align: center;
+    padding: 5px 15px; 
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.quran-text-container {
+    /* 🌟 الحاوية الرئيسية للقراءة */
+    background-color: var(--card-background);
+    border: none; /* إزالة الحدود */
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    flex-grow: 1; /* يجعلها تملأ المساحة المتبقية */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab; 
+}
+
+.gold-frame {
+    border: 5px solid transparent;
+    border-image: linear-gradient(45deg, var(--gold-color), var(--gold-color) 60%, transparent) 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.dark-mode .gold-frame {
+    border-image: linear-gradient(45deg, var(--gold-color), #8C753B 60%, transparent) 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.quran-text-container img {
+    /* 🌟 الصورة تملأ عرض الحاوية بالكامل */
+    width: 100%; 
+    height: auto;
+    display: block;
+    user-select: none; 
+}
+
+/* 🌟 إخفاء أزرار التحكم (التحريك سيكون بالسحب) */
+.page-controls {
+    display: none; 
+}
+
+/* ==================================== */
+/* 6. منطقة الفهرس/الأجزاء */
+/* ==================================== */
+
+.navigation-area {
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.list-content {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: calc(100% - 60px); 
+    overflow-y: auto;
+}
+
+.sura-list-content, .juz-list-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sura-item, .juz-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.sura-item:last-child, .juz-item:last-child {
+    border-bottom: none;
+}
+
+.sura-item:hover, .juz-item:hover {
+    background-color: var(--background-color);
+}
+.dark-mode .sura-item:hover, .dark-mode .juz-item:hover {
+    background-color: #282828;
+}
+
+.sura-name {
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.sura-number, .sura-ayahs {
+    color: #666;
+    font-size: 0.9rem;
+}
+.dark-mode .sura-number, .dark-mode .sura-ayahs {
+    color: #bbb;
+}
+
+/* ==================================== */
+/* 7. شاشة المسبحة (Tasbeeh) */
+/* ==================================== */
+
+.tasbeeh-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 0;
+}
+
+.tasbeeh-display {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--card-background);
+    padding: 20px 40px;
+    border-radius: 50%;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tasbeeh-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.tasbeeh-button:active {
+    transform: scale(0.98);
+}
+
+.tasbeeh-reset {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.tasbeeh-options {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--card-background);
+    border-radius: 8px;
+}
+
+.tasbeeh-options h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* ==================================== */
+/* 8. شاشة الأذكار (Adhkar) */
+/* ==================================== */
+
+.adhkar-content {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+    text-align: right;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dhikr-card {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: var(--background-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.dark-mode .dhikr-card {
+    background-color: #222;
+}
+
+.dhikr-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.dhikr-count {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: left;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 5px;
+}
